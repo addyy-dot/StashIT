@@ -41,7 +41,14 @@ const Chat = () => {
       // 1. Fetch messages
       const msgResponse = await api.get(`/messages/${conversationId}`);
       if (msgResponse.data.success) {
-        setMessages(msgResponse.data.messages);
+        const newMessages = msgResponse.data.messages;
+        setMessages((prev) => {
+          // Avoid triggering state updates if messages are identical (prevents scrolling jumps)
+          const hasChanges =
+            prev.length !== newMessages.length ||
+            (prev.length > 0 && prev[prev.length - 1]?._id !== newMessages[newMessages.length - 1]?._id);
+          return hasChanges ? newMessages : prev;
+        });
       }
 
       // 2. Fetch all user conversations to find metadata of this specific conversation
@@ -64,7 +71,16 @@ const Chat = () => {
   };
 
   useEffect(() => {
+    // Initial page load fetch
     fetchChatData(true);
+
+    // Set up short-polling background fetch every 4 seconds (4000ms)
+    const intervalId = setInterval(() => {
+      fetchChatData(false);
+    }, 4000);
+
+    // Clear interval subscription on component unmount
+    return () => clearInterval(intervalId);
   }, [conversationId]);
 
   useEffect(() => {
