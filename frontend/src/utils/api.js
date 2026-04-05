@@ -28,10 +28,26 @@ api.interceptors.request.use(
         config.headers.Authorization = `Bearer ${parsedAuth.token}`;
       }
     }
-    
     return config;
   },
   (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Response interceptor to handle authorization failures (e.g. invalid/expired tokens)
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    // If the server returns 401 Unauthorized, clean up the stale local credentials
+    if (error.response && error.response.status === 401) {
+      if (localStorage.getItem('stashit_auth')) {
+        localStorage.removeItem('stashit_auth');
+        window.location.href = '/login';
+      }
+    }
     return Promise.reject(error);
   }
 );
