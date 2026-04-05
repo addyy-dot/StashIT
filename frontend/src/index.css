@@ -1,0 +1,90 @@
+/**
+ * @file index.css
+ * @description Why this file exists: To serve as the root stylesheet for the frontend, bringing together Tailwind directives, font imports, and base layouts.
+ * @description Responsibility: Imports modern Inter typography, loads Tailwind compiler layers (base, components, utilities), and declares base body backgrounds and antialiasing parameters.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    /* Apply base styling resets and sleek campus backgrounds */
+    @apply bg-slate-50 text-slate-700 antialiased;
+  }
+}
+
+@layer utilities {
+  /* Global card / container overrides to dark theme */
+  .bg-white {
+    background-color: #111827 !important;
+  }
+
+  /* Specific nav overrides */
+  nav.bg-white {
+    background-color: #0f172a !important;
+  }
+
+  /* Modern dark-themed input controls styling */
+  input, select, textarea {
+    background-color: #1f2937 !important;
+    color: #ffffff !important;
+    border-color: #374151 !important;
+  }
+  
+  input::placeholder, textarea::placeholder {
+    color: #9ca3af !important;
+  }
+
+  /* Override primary buttons to have dark text on teal background */
+  .bg-primary-600 {
+    background-color: #14B8A6 !important;
+    color: #0b0f19 !important;
+    font-weight: 700 !important;
+  }
+
+  .bg-primary-600 * {
+    color: #0b0f19 !important;
+  }
+
+  /* Hover and active states for primary actions */
+  .hover\:bg-primary-700:hover {
+    background-color: #0D9488 !important;
+    color: #ffffff !important;
+  }
+
+  .hover\:bg-primary-700:hover * {
+    color: #ffffff !important;
+  }
+
+  /* Ensure pagination and selections maintain correct color contrast */
+  .bg-primary-600.text-white {
+    color: #0b0f19 !important;
+  }
+
+  /* Sleek background details hover triggers */
+  .hover\:bg-slate-50:hover, .hover\:bg-slate-100:hover {
+    background-color: #1c1c20 !important;
+  }
+
+  /* Utility scrollbar styling */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/**
+ * Line-by-line Explanation:
+ * Line 7: Imports the premium 'Inter' Google Font weighting variations (300 to 700) for clean typography.
+ * Line 9-11: Loads Tailwind CSS compiler hooks to build layout templates.
+ * Line 13: Utilizes Tailwind's custom `@layer` directive to extend default HTML base tags.
+ * Line 14-17: Configures body tag. Selects 'Inter' font rendering, sets background to off-white slate (`#f8fafc`), sets default text color to dark slate (`#0f172a`), and enables subpixel antialiasing for text smoothing.
+ */
