@@ -19,6 +19,8 @@ import CreateListing from './pages/CreateListing';
 import EditListing from './pages/EditListing';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound';
+import Messages from './pages/Messages';
+import Chat from './pages/Chat';
 
 function App() {
   return (
@@ -54,6 +56,22 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/messages"
+              element={
+                <ProtectedRoute>
+                  <Messages />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/messages/:conversationId"
+              element={
+                <ProtectedRoute>
+                  <Chat />
                 </ProtectedRoute>
               }
             />

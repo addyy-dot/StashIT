@@ -14,6 +14,8 @@ const connectDB = require('./config/db');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 const authRoutes = require('./routes/authRoutes');
 const listingRoutes = require('./routes/listingRoutes');
+const conversationRoutes = require('./routes/conversationRoutes');
+const messageRoutes = require('./routes/messageRoutes');
 
 // Establish connection to MongoDB database
 connectDB();
@@ -35,6 +37,10 @@ app.use('/api/auth', authRoutes);
 
 // Mount listings API endpoints
 app.use('/api/listings', listingRoutes);
+
+// Mount chat conversations and messages endpoints
+app.use('/api/conversations', conversationRoutes);
+app.use('/api/messages', messageRoutes);
 
 /**
  * Health Check Endpoint

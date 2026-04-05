@@ -9,15 +9,42 @@ import { useParams, useNavigate, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import api from '../utils/api';
-import { Tag, ShieldCheck, Mail, ArrowLeft, AlertTriangle } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
+import { Tag, ShieldCheck, Mail, ArrowLeft, AlertTriangle, MessageSquare } from 'lucide-react';
 
 const ListingDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const { showToast } = useToast();
   
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+
+  const isSeller = user && listing && user._id === listing.seller._id;
+
+  const handleMessageSeller = async () => {
+    if (!user) {
+      showToast('Please sign in to message the seller', 'error');
+      navigate('/login', { state: { from: { pathname: `/listings/${id}` } } });
+      return;
+    }
+    try {
+      const response = await api.post('/conversations', {
+        sellerId: listing.seller._id,
+        listingId: listing._id,
+      });
+      if (response.data.success) {
+        const conversationId = response.data.conversation._id;
+        navigate(`/messages/${conversationId}`);
+      }
+    } catch (err) {
+      console.error('Failed to start conversation:', err);
+      showToast(err.response?.data?.message || 'Failed to start conversation', 'error');
+    }
+  };
 
   // Fetch listing details from the server when component mounts
   useEffect(() => {
@@ -194,13 +221,24 @@ const ListingDetail = () => {
                       Item Sold
                     </button>
                   ) : (
-                    <a
-                      href={`mailto:${listing.seller.email}?subject=Interested in your StashIT listing: ${encodeURIComponent(listing.title)}`}
-                      className="w-full inline-flex items-center justify-center px-4 py-2.5 bg-primary-600 hover:bg-primary-700 text-white text-sm font-bold rounded-lg transition shadow-sm space-x-2"
-                    >
-                      <Mail className="h-4 w-4" />
-                      <span>Contact Seller</span>
-                    </a>
+                    <div className="space-y-2">
+                      {!isSeller && (
+                        <button
+                          onClick={handleMessageSeller}
+                          className="w-full inline-flex items-center justify-center px-4 py-2.5 bg-primary-600 hover:bg-primary-700 text-white text-sm font-bold rounded-lg transition shadow-sm space-x-2"
+                        >
+                          <MessageSquare className="h-4 w-4" />
+                          <span>Message Seller</span>
+                        </button>
+                      )}
+                      <a
+                        href={`mailto:${listing.seller.email}?subject=Interested in your StashIT listing: ${encodeURIComponent(listing.title)}`}
+                        className="w-full inline-flex items-center justify-center px-4 py-2.5 bg-slate-150 hover:bg-slate-200 border border-slate-200 text-slate-800 hover:text-primary-500 font-bold text-sm rounded-lg transition shadow-sm space-x-2"
+                      >
+                        <Mail className="h-4 w-4" />
+                        <span>Email Seller</span>
+                      </a>
+                    </div>
                   )}
                 </div>
               </div>
