@@ -88,13 +88,13 @@ const Home = () => {
       <Navbar />
 
       {/* Hero Search Section */}
-      <header className="bg-slate-950 text-white py-12 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h1 className="text-3xl font-extrabold sm:text-4xl md:text-5xl tracking-tight">
+      <header className="bg-slate-950 text-white py-7 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+        <div className="max-w-4xl mx-auto text-center space-y-3">
+          <h1 className="text-2xl font-extrabold sm:text-3xl md:text-4xl tracking-tight">
             Find What You Need on Campus
           </h1>
-          <p className="text-slate-450 text-base sm:text-lg max-w-2xl mx-auto">
-            Browse verified second-hand items listed by your fellow AIT students.
+          <p className="text-slate-450 text-sm sm:text-base max-w-2xl mx-auto">
+            Buy, Sell & Donate within the AIT Community
           </p>
 
           {/* Search Bar Form */}
