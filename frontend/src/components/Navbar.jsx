@@ -7,7 +7,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { ShoppingBag, User, LogOut, LayoutDashboard, MessageSquare } from 'lucide-react';
+import { ShoppingBag, User, LogOut, LayoutDashboard, MessageSquare, Home } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -35,6 +35,15 @@ const Navbar = () => {
 
           {/* Navigation Action Anchors */}
           <div className="flex items-center space-x-4">
+            
+            {/* Marketplace Link */}
+            <Link
+              to="/"
+              className="flex items-center space-x-1.5 text-sm font-medium text-slate-600 hover:text-primary-600 px-3 py-2 rounded-lg transition hover:bg-slate-50"
+            >
+              <Home className="h-4 w-4" />
+              <span className="hidden sm:inline">Marketplace</span>
+            </Link>
             
             {user ? (
               // Authenticated User UI Items
