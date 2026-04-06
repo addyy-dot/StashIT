@@ -57,13 +57,15 @@ const Chat = () => {
         const found = convsResponse.data.conversations.find((c) => c._id === conversationId);
         if (found) {
           setConversation(found);
-        } else {
+        } else if (showLoading) {
           setError('Conversation not found in your inbox.');
         }
       }
     } catch (err) {
       console.error('Failed to load chat data:', err);
-      setError(err.response?.data?.message || 'Failed to retrieve chat history.');
+      if (showLoading) {
+        setError(err.response?.data?.message || 'Failed to retrieve chat history.');
+      }
     } finally {
       setLoading(false);
       setRefreshing(false);
