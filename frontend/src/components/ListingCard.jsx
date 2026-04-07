@@ -9,7 +9,37 @@ import { Link } from 'react-router-dom';
 import { Tag, User } from 'lucide-react';
 
 const ListingCard = ({ listing }) => {
-  const { _id, title, price, category, condition, image, status } = listing;
+  const { _id, title, price, category, condition, image, status, seller } = listing;
+
+  const getYearString = (year) => {
+    switch (year) {
+      case 1:
+        return 'FE';
+      case 2:
+        return 'SE';
+      case 3:
+        return 'TE';
+      case 4:
+        return 'BE';
+      default:
+        return '';
+    }
+  };
+
+  const formatYearOrdinal = (year) => {
+    switch (year) {
+      case 1:
+        return '1st';
+      case 2:
+        return '2nd';
+      case 3:
+        return '3rd';
+      case 4:
+        return '4th';
+      default:
+        return '';
+    }
+  };
 
   // Condition styling colors configuration
   const getConditionColor = (cond) => {
@@ -68,6 +98,18 @@ const ListingCard = ({ listing }) => {
         <h3 className="text-base font-bold text-slate-900 line-clamp-1 group-hover:text-primary-600 transition">
           {title}
         </h3>
+
+        {/* Seller Info Block */}
+        {seller && (
+          <div className="text-[11px] text-slate-450 space-y-0.5 mt-1">
+            <p>
+              Posted by: <span className="font-bold text-slate-650">{seller.name} {seller.year ? `(${getYearString(seller.year)})` : ''}</span>
+            </p>
+            <p className="text-primary-500 font-bold">
+              {seller.year ? `${formatYearOrdinal(seller.year)} Year Student` : ''}
+            </p>
+          </div>
+        )}
 
         {/* Item Price & Status Container */}
         <div className="flex items-center justify-between pt-2 border-t border-slate-150 mt-auto">
