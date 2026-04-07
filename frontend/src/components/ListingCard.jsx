@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Tag, ShieldCheck } from 'lucide-react';
+import { Tag, User } from 'lucide-react';
 
 const ListingCard = ({ listing }) => {
   const { _id, title, price, category, condition, image, status } = listing;
@@ -75,8 +75,8 @@ const ListingCard = ({ listing }) => {
             ₹{price.toLocaleString('en-IN')}
           </span>
           <span className="inline-flex items-center text-[10px] font-semibold text-slate-400">
-            <ShieldCheck className="h-3.5 w-3.5 text-emerald-500 mr-0.5" />
-            <span>Verified</span>
+            <User className="h-3.5 w-3.5 text-primary-500 mr-0.5" />
+            <span>AIT Student</span>
           </span>
         </div>
       </div>
