@@ -181,12 +181,10 @@ const ListingDetail = () => {
 
               {/* Seller Contact Card Block */}
               <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-4 mt-6">
-                <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-                  <h3 className="text-sm font-bold text-slate-850 flex items-center space-x-1.5">
-                    <User className="h-4.5 w-4.5 text-primary-500" />
-                    <span>Student Seller</span>
+                <div className="flex items-center justify-between border-b border-slate-200 pb-2 mb-2">
+                  <h3 className="text-sm font-bold text-slate-800">
+                    Seller Details
                   </h3>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase">AIT Pune</span>
                 </div>
 
                 {/* Seller Details Info */}

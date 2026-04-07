@@ -74,10 +74,6 @@ const ListingCard = ({ listing }) => {
           <span className="text-lg font-black text-slate-900">
             ₹{price.toLocaleString('en-IN')}
           </span>
-          <span className="inline-flex items-center text-[10px] font-semibold text-slate-400">
-            <User className="h-3.5 w-3.5 text-primary-500 mr-0.5" />
-            <span>AIT Student</span>
-          </span>
         </div>
       </div>
     </Link>
