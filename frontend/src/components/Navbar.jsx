@@ -7,7 +7,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { ShoppingBag, User, LogOut, LayoutDashboard, MessageSquare, Home } from 'lucide-react';
+import { ShoppingBag, User, LogOut, LayoutDashboard, MessageSquare, Home, Plus } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -64,6 +64,15 @@ const Navbar = () => {
                 >
                   <MessageSquare className="h-4 w-4" />
                   <span className="hidden sm:inline">Messages</span>
+                </Link>
+
+                {/* Sell Item CTA Button */}
+                <Link
+                  to="/listings/create"
+                  className="inline-flex items-center justify-center px-3.5 py-1.5 border border-transparent text-sm font-extrabold rounded-lg text-white bg-primary-600 hover:bg-primary-700 shadow-sm transition space-x-1 hover:scale-[1.03]"
+                >
+                  <Plus className="h-4 w-4 stroke-[3]" />
+                  <span>Sell Item</span>
                 </Link>
 
                 {/* Profile Banner */}
