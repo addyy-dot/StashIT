@@ -7,7 +7,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { ShoppingBag, User, LogOut, LayoutDashboard, MessageSquare, Home, Plus } from 'lucide-react';
+import { ShoppingBag, User, LogOut, LayoutDashboard, MessageSquare, Home, Plus, Gift } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -43,6 +43,15 @@ const Navbar = () => {
             >
               <Home className="h-4 w-4" />
               <span className="hidden sm:inline">Marketplace</span>
+            </Link>
+
+            {/* GiveAway Corner Link */}
+            <Link
+              to="/?category=GiveAway Corner"
+              className="flex items-center space-x-1.5 text-sm font-semibold text-teal-400 hover:text-teal-300 px-3 py-2 rounded-lg transition hover:bg-slate-800/40 border border-teal-500/20 shadow-sm"
+            >
+              <Gift className="h-4 w-4" />
+              <span>GiveAway Corner</span>
             </Link>
             
             {user ? (

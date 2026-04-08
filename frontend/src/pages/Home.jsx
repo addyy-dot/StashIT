@@ -5,15 +5,17 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ListingCard from '../components/ListingCard';
 import api from '../utils/api';
-import { Search, SlidersHorizontal, BookOpen, AlertTriangle } from 'lucide-react';
+import { Search, SlidersHorizontal, BookOpen, AlertTriangle, Gift } from 'lucide-react';
 
-const CATEGORIES = ['All', 'Books', 'Furniture', 'Electronics', 'Sports', 'Hostel Essentials', 'GiveAway Corner', 'Others'];
+const CATEGORIES = ['All', 'Books', 'Furniture', 'Electronics', 'Sports', 'Hostel Essentials', 'Others'];
 
 const Home = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [listings, setListings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -21,7 +23,7 @@ const Home = () => {
   // Search and Filter States
   const [searchInput, setSearchInput] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState(searchParams.get('category') || 'All');
   
   // Pagination States
   const [currentPage, setCurrentPage] = useState(1);
@@ -71,9 +73,26 @@ const Home = () => {
     setCurrentPage(1); // Reset page to 1 on search queries
   };
 
+  // Sync selectedCategory with searchParams changes (e.g. from Navbar link click)
+  useEffect(() => {
+    const urlCategory = searchParams.get('category') || 'All';
+    if (urlCategory !== selectedCategory) {
+      setSelectedCategory(urlCategory);
+      setCurrentPage(1);
+    }
+  }, [searchParams]);
+
   const handleCategorySelect = (category) => {
     setSelectedCategory(category);
     setCurrentPage(1); // Reset page to 1 on filter changes
+    
+    // Sync category URL param
+    if (category === 'All') {
+      searchParams.delete('category');
+    } else {
+      searchParams.set('category', category);
+    }
+    setSearchParams(searchParams);
   };
 
   const handlePageChange = (newPage) => {
@@ -183,12 +202,59 @@ const Home = () => {
           ) : (
             // Catalog Cards Grid
             <>
-              {/* Recently Added Section Header Badge */}
-              <div className="flex items-center mb-6">
-                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-150 border border-slate-200/30 text-slate-800 shadow-sm select-none">
-                  Recently Added
-                </span>
-              </div>
+              {/* GiveAway Corner Promotional Callout Banner */}
+              {selectedCategory !== 'GiveAway Corner' && (
+                <div className="mb-8 p-5 rounded-2xl bg-gradient-to-r from-teal-950/40 via-slate-900/60 to-slate-900/40 border border-teal-500/10 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg backdrop-blur-sm">
+                  <div className="flex items-center space-x-3.5 text-left">
+                    <div className="p-3 bg-teal-500/10 rounded-xl text-teal-400 border border-teal-500/20 shadow-inner">
+                      <Gift className="h-6 w-6 animate-bounce" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-bold text-slate-100 flex items-center gap-1.5">
+                        StashIT GiveAway Corner 🎁
+                      </h4>
+                      <p className="text-xs text-slate-450 mt-1 max-w-xl">
+                        Looking for free textbooks, furniture, or hostel essentials? Claim items donated by your senior campus peers completely free of cost (₹0).
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleCategorySelect('GiveAway Corner')}
+                    className="w-full sm:w-auto px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-slate-950 hover:text-white font-extrabold text-xs rounded-xl shadow-md transition transform hover:scale-[1.03] flex items-center justify-center gap-1.5"
+                  >
+                    <Gift className="h-4 w-4" />
+                    <span>Explore Free Items</span>
+                  </button>
+                </div>
+              )}
+
+              {/* Header section displaying active category label */}
+              {selectedCategory === 'GiveAway Corner' ? (
+                <div className="mb-6 border-b border-slate-200 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                  <div>
+                    <h2 className="text-xl font-black text-slate-900 flex items-center gap-2">
+                      <Gift className="text-primary-500 h-5.5 w-5.5 animate-pulse" />
+                      <span>GiveAway Corner 🎁</span>
+                    </h2>
+                    <p className="text-xs text-slate-500 mt-1">
+                      All listings in this section are completely free of charge (₹0). Perfect for student needs!
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => handleCategorySelect('All')}
+                    className="text-xs font-bold text-primary-600 hover:text-primary-700 hover:underline inline-flex items-center"
+                  >
+                    Go back to Marketplace
+                  </button>
+                </div>
+              ) : (
+                /* Recently Added Section Header Badge */
+                <div className="flex items-center mb-6">
+                  <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-150 border border-slate-200/30 text-slate-800 shadow-sm select-none">
+                    Recently Added
+                  </span>
+                </div>
+              )}
 
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {listings.map((listing) => (
