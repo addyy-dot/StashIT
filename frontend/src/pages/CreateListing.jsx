@@ -12,7 +12,7 @@ import api from '../utils/api';
 import { PlusCircle, Image as ImageIcon, IndianRupee, AlertTriangle, ArrowLeft } from 'lucide-react';
 import { useToast } from '../context/ToastContext';
 
-const CATEGORIES = ['Books', 'Furniture', 'Electronics', 'Sports', 'Hostel Essentials', 'Others'];
+const CATEGORIES = ['Books', 'Furniture', 'Electronics', 'Sports', 'Hostel Essentials', 'GiveAway Corner', 'Others'];
 const CONDITIONS = ['New', 'Like New', 'Good', 'Fair'];
 
 const CreateListing = () => {

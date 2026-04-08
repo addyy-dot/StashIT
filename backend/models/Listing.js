@@ -34,9 +34,10 @@ const listingSchema = new mongoose.Schema(
           'Electronics',
           'Sports',
           'Hostel Essentials',
+          'GiveAway Corner',
           'Others',
         ],
-        message: 'Please select a valid category from: Books, Furniture, Electronics, Sports, Hostel Essentials, or Others',
+        message: 'Please select a valid category from: Books, Furniture, Electronics, Sports, Hostel Essentials, GiveAway Corner, or Others',
       },
     },
     condition: {

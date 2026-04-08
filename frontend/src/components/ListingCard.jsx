@@ -113,9 +113,16 @@ const ListingCard = ({ listing }) => {
 
         {/* Item Price & Status Container */}
         <div className="flex items-center justify-between pt-2 border-t border-slate-150 mt-auto">
-          <span className="text-lg font-black text-slate-900">
-            ₹{price.toLocaleString('en-IN')}
-          </span>
+          <div className="flex flex-col">
+            <span className="text-lg font-black text-slate-900">
+              ₹{price.toLocaleString('en-IN')}
+            </span>
+            {price === 0 && (
+              <span className="text-[10px] font-bold text-primary-500 uppercase tracking-wider mt-0.5">
+                FREE
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </Link>

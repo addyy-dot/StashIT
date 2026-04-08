@@ -165,9 +165,16 @@ const ListingDetail = () => {
                 </h1>
 
                 {/* Price */}
-                <p className="text-3xl font-black text-slate-900">
-                  ₹{listing.price.toLocaleString('en-IN')}
-                </p>
+                <div className="flex flex-col">
+                  <p className="text-3xl font-black text-slate-900">
+                    ₹{listing.price.toLocaleString('en-IN')}
+                  </p>
+                  {listing.price === 0 && (
+                    <span className="text-sm font-bold text-primary-500 uppercase tracking-wider mt-1 select-none">
+                      FREE
+                    </span>
+                  )}
+                </div>
 
                 {/* Description */}
                 <div className="pt-4 border-t border-slate-150">

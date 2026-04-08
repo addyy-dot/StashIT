@@ -11,7 +11,7 @@ import ListingCard from '../components/ListingCard';
 import api from '../utils/api';
 import { Search, SlidersHorizontal, BookOpen, AlertTriangle } from 'lucide-react';
 
-const CATEGORIES = ['All', 'Books', 'Furniture', 'Electronics', 'Sports', 'Hostel Essentials', 'Others'];
+const CATEGORIES = ['All', 'Books', 'Furniture', 'Electronics', 'Sports', 'Hostel Essentials', 'GiveAway Corner', 'Others'];
 
 const Home = () => {
   const [listings, setListings] = useState([]);
@@ -183,6 +183,13 @@ const Home = () => {
           ) : (
             // Catalog Cards Grid
             <>
+              {/* Recently Added Section Header Badge */}
+              <div className="flex items-center mb-6">
+                <span className="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-slate-150 border border-slate-200/30 text-slate-800 shadow-sm select-none">
+                  Recently Added
+                </span>
+              </div>
+
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {listings.map((listing) => (
                   <ListingCard key={listing._id} listing={listing} />
