@@ -107,36 +107,77 @@ const Home = () => {
       <Navbar />
 
       {/* Hero Search Section */}
-      <header className="bg-slate-950 text-white py-7 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
-        <div className="max-w-4xl mx-auto text-center space-y-3">
-          <h1 className="text-2xl font-extrabold sm:text-3xl md:text-4xl tracking-tight">
-            Find What You Need on Campus
-          </h1>
-          <p className="text-slate-450 text-sm sm:text-base max-w-2xl mx-auto">
-            Buy, Sell & Donate within the AIT Community
-          </p>
+      <header className="bg-slate-950 text-white py-8 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+          
+          {/* Left Panel: Marketplace Title & Search */}
+          <div className="md:col-span-7 lg:col-span-8 text-left space-y-4">
+            <h1 className="text-2xl font-extrabold sm:text-3xl md:text-4xl tracking-tight text-slate-900">
+              Find What You Need on Campus
+            </h1>
+            <p className="text-slate-450 text-sm sm:text-base max-w-2xl">
+              Buy, Sell & Donate within the AIT Community
+            </p>
 
-          {/* Search Bar Form */}
-          <form onSubmit={handleSearchSubmit} className="max-w-2xl mx-auto mt-6">
-            <div className="relative flex items-center bg-white rounded-xl shadow-lg overflow-hidden p-1">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Search className="h-5 w-5 text-slate-400" />
+            {/* Search Bar Form */}
+            <form onSubmit={handleSearchSubmit} className="max-w-xl mt-6">
+              <div className="relative flex items-center bg-white rounded-xl shadow-lg overflow-hidden p-1">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Search className="h-5 w-5 text-slate-400" />
+                </div>
+                <input
+                  type="text"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  placeholder="Search for books, study tables, electronics..."
+                  className="block w-full pl-11 pr-24 py-3 bg-white text-slate-900 border-none rounded-xl focus:outline-none text-sm placeholder-slate-400"
+                />
+                <button
+                  type="submit"
+                  className="absolute right-1 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-primary-600 hover:bg-primary-700 transition shadow-sm"
+                >
+                  Search
+                </button>
               </div>
-              <input
-                type="text"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                placeholder="Search for books, study tables, electronics..."
-                className="block w-full pl-11 pr-24 py-3 bg-white text-slate-900 border-none rounded-xl focus:outline-none text-sm placeholder-slate-400"
-              />
-              <button
-                type="submit"
-                className="absolute right-1 px-5 py-2.5 rounded-lg text-sm font-semibold text-white bg-primary-600 hover:bg-primary-700 transition shadow-sm"
-              >
-                Search
-              </button>
+            </form>
+          </div>
+
+          {/* Right Panel: Optimised GiveAway Corner callout card */}
+          <div className="md:col-span-5 lg:col-span-4">
+            <div className="p-5 rounded-2xl bg-gradient-to-br from-teal-950/40 via-slate-900/60 to-slate-900/40 border border-teal-500/10 shadow-lg backdrop-blur-sm flex flex-col justify-between h-full space-y-4">
+              <div className="flex items-start space-x-3">
+                <div className="p-2.5 bg-teal-500/10 rounded-xl text-teal-400 border border-teal-500/20 shadow-inner flex-shrink-0 mt-0.5">
+                  <Gift className="h-5 w-5 animate-pulse" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-100 flex items-center gap-1.5">
+                    GiveAway Corner 🎁
+                  </h4>
+                  <p className="text-xs text-slate-450 mt-1 leading-relaxed">
+                    Grab textbooks, furniture, or hostel essentials donated by your seniors completely free of cost (₹0).
+                  </p>
+                </div>
+              </div>
+              
+              {selectedCategory === 'GiveAway Corner' ? (
+                <button
+                  onClick={() => handleCategorySelect('All')}
+                  className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-bold text-xs rounded-xl shadow-md transition transform hover:scale-[1.02] flex items-center justify-center gap-1.5 border border-slate-750"
+                >
+                  Back to Marketplace
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleCategorySelect('GiveAway Corner')}
+                  className="w-full py-2 bg-primary-600 hover:bg-primary-700 text-slate-950 hover:text-white font-extrabold text-xs rounded-xl shadow-md transition transform hover:scale-[1.02] flex items-center justify-center gap-1.5"
+                >
+                  <Gift className="h-3.5 w-3.5" />
+                  <span>Explore Free Items</span>
+                </button>
+              )}
             </div>
-          </form>
+          </div>
+
         </div>
       </header>
 
@@ -202,32 +243,6 @@ const Home = () => {
           ) : (
             // Catalog Cards Grid
             <>
-              {/* GiveAway Corner Promotional Callout Banner */}
-              {selectedCategory !== 'GiveAway Corner' && (
-                <div className="mb-8 p-5 rounded-2xl bg-gradient-to-r from-teal-950/40 via-slate-900/60 to-slate-900/40 border border-teal-500/10 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg backdrop-blur-sm">
-                  <div className="flex items-center space-x-3.5 text-left">
-                    <div className="p-3 bg-teal-500/10 rounded-xl text-teal-400 border border-teal-500/20 shadow-inner">
-                      <Gift className="h-6 w-6 animate-bounce" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-slate-100 flex items-center gap-1.5">
-                        StashIT GiveAway Corner 🎁
-                      </h4>
-                      <p className="text-xs text-slate-450 mt-1 max-w-xl">
-                        Looking for free textbooks, furniture, or hostel essentials? Claim items donated by your senior campus peers completely free of cost (₹0).
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => handleCategorySelect('GiveAway Corner')}
-                    className="w-full sm:w-auto px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-slate-950 hover:text-white font-extrabold text-xs rounded-xl shadow-md transition transform hover:scale-[1.03] flex items-center justify-center gap-1.5"
-                  >
-                    <Gift className="h-4 w-4" />
-                    <span>Explore Free Items</span>
-                  </button>
-                </div>
-              )}
-
               {/* Header section displaying active category label */}
               {selectedCategory === 'GiveAway Corner' ? (
                 <div className="mb-6 border-b border-slate-200 pb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
