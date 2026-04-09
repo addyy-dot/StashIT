@@ -49,10 +49,10 @@ const Navbar = () => {
             {!user && (
               <Link
                 to="/?category=GiveAway Corner"
-                className="flex items-center space-x-1.5 text-sm font-medium text-slate-600 hover:text-primary-600 px-3 py-2 rounded-lg transition hover:bg-slate-50"
+                className="flex items-center space-x-1.5 text-xs font-bold text-teal-400 hover:text-teal-300 px-3.5 py-1.5 rounded-lg border border-teal-500/20 bg-teal-950/25 hover:bg-teal-900/30 transition shadow-sm"
               >
-                <Gift className="h-4 w-4 text-teal-500" />
-                <span className="hidden sm:inline">GiveAway</span>
+                <Gift className="h-3.5 w-3.5" />
+                <span>GiveAway</span>
               </Link>
             )}
 
@@ -81,10 +81,10 @@ const Navbar = () => {
                 {/* GiveAway Link for Authenticated Users */}
                 <Link
                   to="/?category=GiveAway Corner"
-                  className="flex items-center space-x-1.5 text-sm font-medium text-slate-600 hover:text-primary-600 px-3 py-2 rounded-lg transition hover:bg-slate-50"
+                  className="flex items-center space-x-1.5 text-xs font-bold text-teal-400 hover:text-teal-300 px-3.5 py-1.5 rounded-lg border border-teal-500/20 bg-teal-950/25 hover:bg-teal-900/30 transition shadow-sm"
                 >
-                  <Gift className="h-4 w-4 text-teal-500" />
-                  <span className="hidden sm:inline">GiveAway</span>
+                  <Gift className="h-3.5 w-3.5" />
+                  <span>GiveAway</span>
                 </Link>
 
                 {/* Sell Item CTA Button */}
