@@ -143,40 +143,22 @@ const Home = () => {
       {/* Main Marketplace Catalog Grid */}
       <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow">
         
-        {/* Categories and Standalone GiveAway Corner Button row */}
-        <section className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
-          {/* Category Tab Scrollbars */}
-          <div className="overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide flex-grow max-w-full md:max-w-[75%]">
-            <div className="flex space-x-2 min-w-max">
-              {CATEGORIES.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => handleCategorySelect(category)}
-                  className={`px-4 py-2 rounded-full text-xs font-semibold border transition whitespace-nowrap ${
-                    selectedCategory === category
-                      ? 'bg-primary-600 border-primary-600 text-white shadow-sm'
-                      : 'bg-white border-slate-200 text-slate-650 hover:bg-slate-50'
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Standalone Separate GiveAway Corner Pill Button */}
-          <div className="flex-shrink-0 self-start md:self-auto">
-            <button
-              onClick={() => handleCategorySelect(selectedCategory === 'GiveAway Corner' ? 'All' : 'GiveAway Corner')}
-              className={`px-4.5 py-2 rounded-full text-xs font-extrabold border transition flex items-center gap-1.5 shadow-sm whitespace-nowrap ${
-                selectedCategory === 'GiveAway Corner'
-                  ? 'bg-primary-600 border-primary-600 text-slate-950 shadow-md scale-[1.02]'
-                  : 'bg-teal-950/35 border-teal-500/40 text-teal-400 hover:bg-teal-950/50 hover:border-teal-500'
-              }`}
-            >
-              <Gift className={`h-3.5 w-3.5 ${selectedCategory === 'GiveAway Corner' ? 'animate-bounce' : ''}`} />
-              <span>GiveAway Corner 🎁</span>
-            </button>
+        {/* Category Tab Scrollbars */}
+        <section className="mb-8 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 scrollbar-hide">
+          <div className="flex space-x-2 min-w-max">
+            {CATEGORIES.map((category) => (
+              <button
+                key={category}
+                onClick={() => handleCategorySelect(category)}
+                className={`px-4 py-2 rounded-full text-xs font-semibold border transition whitespace-nowrap ${
+                  selectedCategory === category
+                    ? 'bg-primary-600 border-primary-600 text-white shadow-sm'
+                    : 'bg-white border-slate-200 text-slate-650 hover:bg-slate-50'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
           </div>
         </section>
 

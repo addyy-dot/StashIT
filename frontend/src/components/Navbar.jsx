@@ -7,7 +7,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { ShoppingBag, User, LogOut, LayoutDashboard, MessageSquare, Home, Plus } from 'lucide-react';
+import { ShoppingBag, User, LogOut, LayoutDashboard, MessageSquare, Home, Plus, Gift } from 'lucide-react';
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -45,6 +45,17 @@ const Navbar = () => {
               <span className="hidden sm:inline">Marketplace</span>
             </Link>
 
+            {/* GiveAway Link for Guest Users */}
+            {!user && (
+              <Link
+                to="/?category=GiveAway Corner"
+                className="flex items-center space-x-1.5 text-sm font-medium text-slate-600 hover:text-primary-600 px-3 py-2 rounded-lg transition hover:bg-slate-50"
+              >
+                <Gift className="h-4 w-4 text-teal-500" />
+                <span className="hidden sm:inline">GiveAway</span>
+              </Link>
+            )}
+
             
             {user ? (
               // Authenticated User UI Items
@@ -65,6 +76,15 @@ const Navbar = () => {
                 >
                   <MessageSquare className="h-4 w-4" />
                   <span className="hidden sm:inline">Messages</span>
+                </Link>
+
+                {/* GiveAway Link for Authenticated Users */}
+                <Link
+                  to="/?category=GiveAway Corner"
+                  className="flex items-center space-x-1.5 text-sm font-medium text-slate-600 hover:text-primary-600 px-3 py-2 rounded-lg transition hover:bg-slate-50"
+                >
+                  <Gift className="h-4 w-4 text-teal-500" />
+                  <span className="hidden sm:inline">GiveAway</span>
                 </Link>
 
                 {/* Sell Item CTA Button */}
