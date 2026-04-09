@@ -106,6 +106,14 @@ const Home = () => {
     <div className="min-h-screen flex flex-col bg-slate-50">
       <Navbar />
 
+      {/* GiveAway Corner Info Bar */}
+      {selectedCategory === 'GiveAway Corner' && (
+        <div className="bg-teal-950/20 border-b border-teal-500/10 text-center py-1.5 px-4 text-[10px] sm:text-xs font-bold text-teal-400 select-none flex items-center justify-center gap-1.5 shadow-inner">
+          <Gift className="h-3 w-3 animate-pulse text-teal-450" />
+          <span>Grab textbooks, furniture, or hostel essentials donated by your seniors completely free of cost (₹0).</span>
+        </div>
+      )}
+
       {/* Hero Search Section */}
       <header className="bg-slate-950 text-white py-7 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
         <div className="max-w-4xl mx-auto text-center space-y-3">
