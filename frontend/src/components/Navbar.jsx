@@ -48,7 +48,7 @@ const Navbar = () => {
             {/* GiveAway Link for Guest Users */}
             {!user && (
               <Link
-                to="/?category=GiveAway Corner"
+                to="/giveaway"
                 className="flex items-center space-x-1.5 text-xs font-bold text-teal-400 hover:text-teal-300 px-3.5 py-1.5 rounded-lg border border-teal-500/20 bg-teal-950/25 hover:bg-teal-900/30 transition shadow-sm"
               >
                 <Gift className="h-3.5 w-3.5" />
@@ -80,7 +80,7 @@ const Navbar = () => {
 
                 {/* GiveAway Link for Authenticated Users */}
                 <Link
-                  to="/?category=GiveAway Corner"
+                  to="/giveaway"
                   className="flex items-center space-x-1.5 text-xs font-bold text-teal-400 hover:text-teal-300 px-3.5 py-1.5 rounded-lg border border-teal-500/20 bg-teal-950/25 hover:bg-teal-900/30 transition shadow-sm"
                 >
                   <Gift className="h-3.5 w-3.5" />

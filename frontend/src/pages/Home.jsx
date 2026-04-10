@@ -5,7 +5,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ListingCard from '../components/ListingCard';
@@ -107,20 +107,12 @@ const Home = () => {
       <Navbar />
 
       {/* GiveAway Corner Info / Announcement Bar */}
-      {selectedCategory === 'GiveAway Corner' ? (
-        <div className="w-full bg-teal-950/20 border-b border-teal-500/10 text-center py-1.5 px-4 text-[10px] sm:text-xs font-bold text-teal-400 select-none flex items-center justify-center gap-1.5 shadow-inner">
-          <Gift className="h-3 w-3 animate-pulse text-teal-400" />
-          <span>Grab textbooks, furniture, or hostel essentials donated by your seniors completely free of cost (₹0).</span>
-        </div>
-      ) : (
-        <button
-          onClick={() => handleCategorySelect('GiveAway Corner')}
-          className="w-full bg-teal-950/15 hover:bg-teal-950/25 border-b border-teal-500/10 text-center py-1.5 px-4 text-[10px] sm:text-xs font-bold text-teal-450 hover:text-teal-350 select-none flex items-center justify-center gap-1.5 transition shadow-inner"
-        >
-          <Gift className="h-3 w-3 animate-bounce text-teal-450" />
-          <span>Grab textbooks, furniture, or hostel essentials donated by your seniors completely free of cost (₹0). Visit GiveAway Corner →</span>
-        </button>
-      )}
+      <Link
+        to="/giveaway"
+        className="w-full bg-teal-950/15 hover:bg-teal-950/25 border-b border-teal-500/10 text-center py-1.5 px-4 text-[10px] sm:text-xs font-bold text-teal-450 hover:text-teal-300 flex items-center justify-center gap-1.5 transition shadow-inner"
+      >
+        <span>🎁 GiveAway Corner: Discover books, furniture, and hostel essentials available FREE from fellow AIT students →</span>
+      </Link>
 
       {/* Hero Search Section */}
       <header className="bg-slate-950 text-white py-7 px-4 sm:px-6 lg:px-8 border-b border-slate-800">
